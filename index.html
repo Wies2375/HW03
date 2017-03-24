@@ -1,0 +1,152 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <title>Page Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <script src="https://d3js.org/d3.v3.js"></script>
+</head>
+
+
+<body>
+
+    <script>
+        var arr = [85, 60, 99, 49, 77, 82];
+        var w = 600;
+        var h = 300;
+        var p = 100;
+
+        svg();
+        bind(arr);
+        render();
+
+        function svg() {
+            d3.select("body")
+                .append("svg")
+                .attr({
+                    "width": w,
+                    "height": h-60
+                });
+        }
+
+        function bind(data) {
+            var selection =
+                d3.select("svg")
+                .selectAll("rect")
+                .data(data);
+            selection.enter().append("rect");
+            selection.exit().remove();
+
+            var selection_text =
+                d3.select("svg")
+                .selectAll("text")
+                .data(data);
+            selection_text.enter().append("text");
+            selection_text.exit().remove();
+        }
+
+        function render() {
+            d3.selectAll("rect")
+                .attr({
+                    "x": function(d, i) {
+                        return p + 23 * i;
+                    },
+                    "y": function(d) {
+                        return h - p - d;
+                    },
+                    "width": 20,
+                    "height": function(d) {
+                        return d;
+                    },
+                    "fill": function(d) {
+                        if (d < 70) {
+                            return "red";
+                        }
+                        else {
+                            return "lightgreen"
+                        }
+                    }
+                });
+            d3.selectAll("text").attr({
+                    "x": function(d, i) {
+                        return p + 23 * i;
+                    },
+                    "y": function(d) {
+                        return h - p + 20;
+                    },
+                    "font-size": 12
+                })
+                .text(function(d) {
+                    return d;
+                })
+        }
+
+        function update() {
+            var num = random(10, 100);
+            arr.push(num);
+            bind(arr);
+            render();
+        }
+
+        function update_remove() {
+            var num = random(10, 100);
+            arr.pop();
+            bind(arr);
+            render();
+        }
+
+        function random(N, M) {
+            //            return Math.ceil(Math.random()*(M-N)+N);
+            var rScale = d3.scale.linear().domain([0, 1]).rangeRound([N, M]);
+            return rScale(Math.random());
+        }
+
+        
+    </script>
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+    <input type="button" value="新增" onclick="update()">
+    
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+    <input type="button" value="移除" onclick="update_remove()">
+
+
+</body>
+
+</html>
+
+
+
+
+<!--
+        function update(){
+            var num = random(10,100);
+            arr.push(num);
+            bind(arr);
+            render();
+        }
+        function update_remove(){
+            var num = random(10,100);
+            arr.pop();
+            bind(arr);
+            render();
+        }
+        function random(N,M){
+//            return Math.ceil(Math.random()*(M-N)+N);
+            var rScale = d3.scale.linear().domain([0,1]).rangeRound([N,M]);
+            return rScale(Math.random());
+        }
+        
+        
+        
+        var index = ["中國國民黨", "民主進步黨", "時代力力量", "無黨團結聯盟", "親民黨"];
+var color = ["blue","green","yellow","gray","orange"];
+
+var xScale = d3.scale.ordinal()
+      .domain(index)
+      .range(color);
+
+console.log(xScale("時代力力量"));
+    -->
