@@ -14,7 +14,7 @@
 
     <script>
         var arr = [85, 60, 99, 49, 77, 82];
-        var w = 400;
+        var w = 1000;
         var h = 300;
         var p = 100;
 
@@ -103,24 +103,6 @@
             return rScale(Math.random());
         }
 
-        
-    </script>
-<br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="button" value="新增" onclick="update()">
-&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="button" value="移除" onclick="update_remove()">
-
-
-</body>
-
-</html>
-
-
-
-
-<!--
         function update(){
             var num = random(10,100);
             arr.push(num);
@@ -142,11 +124,26 @@
         
         
         var index = ["中國國民黨", "民主進步黨", "時代力力量", "無黨團結聯盟", "親民黨"];
-var color = ["blue","green","yellow","gray","orange"];
+        var color = ["blue","green","yellow","gray","orange"]; 
+        var xScale =
+            d3.scale.ordinal() 
+              .domain(index)
+              .range(color);
+            console
+              .log(xScale("民主進步黨"));  
+    </script>
+<br>
 
-var xScale = d3.scale.ordinal()
-      .domain(index)
-      .range(color);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" value="新增" onclick="update()">
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" value="移除" onclick="update_remove()">
 
-console.log(xScale("時代力力量"));
-    -->
+
+</body>
+
+</html>
+
+
+
+
